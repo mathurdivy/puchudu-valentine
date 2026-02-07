@@ -69,8 +69,8 @@ img {
 <body>
 
 <!-- music -->
-<audio id="music" preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a0a0f5b0.mp3?filename=romantic-love-ambient-11060.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/11/25/audio_c3f6c1c9a3.mp3?filename=love-ambient-11276.mp3" type="audio/mpeg">
 </audio>
 
 <!-- SCREEN 1 -->
@@ -135,7 +135,12 @@ yesBtn.onclick = startSequence;
 
 function startSequence() {
     // start music after user tap
-    document.getElementById("music").play();
+    const music = document.getElementById("music");
+    music.volume = 0.6;
+
+    music.play().catch(err => {
+        console.log("Music play blocked:", err);
+    });
 
     show("screen2");
     setTimeout(() => show("screen3"), 2200);
@@ -151,3 +156,4 @@ function show(id) {
 
 </body>
 </html>
+
