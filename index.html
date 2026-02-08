@@ -17,6 +17,18 @@ body {
     text-align: center;
 }
 
+.pulse {
+    animation: heartbeat 1.2s infinite;
+    display: inline-block;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    40% { transform: scale(0.95); }
+    60% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
 .container {
     background: white;
     padding: 28px;
@@ -25,6 +37,32 @@ body {
     position: relative;
     width: 92%;
     max-width: 380px;
+}
+
+.bg-love-text {
+    position: absolute;
+    font-size: 42px;
+    font-family: cursive;
+    opacity: 0.08;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.heart {
+    position: fixed;
+    top: -20px;
+    font-size: 20px;
+    animation: fall linear forwards;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
 }
 
 h1 { color: #e91e63; margin-bottom: 10px; }
@@ -75,7 +113,7 @@ img {
 
 <!-- SCREEN 1 -->
 <div class="container screen" id="screen1" style="display:block">
-    <h1>Puchudu ❤️</h1>
+    <h1 class="pulse">Puchudu ❤️</h1>
     <h2>Will you be my Valentine?</h2>
 
     <button id="yesBtn">Yes 😍</button>
@@ -98,7 +136,11 @@ img {
 
 <!-- SCREEN 4 -->
 <div class="container screen" id="screen4">
-    <h1>Happy Valentine’s Day 💖</h1>
+    <div class="bg-love-text">Divya Ka Divy</div>
+    <div id="hearts"></div>
+
+    <h1 class="pulse">Happy Valentine’s Day 💖</h1>
+    <h2 class="pulse">Puchudu ❤️</h2>
     <p>You are officially stuck with me now 😄</p>
     <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
     <p class="small">No escape. Only love.</p>
@@ -152,7 +194,27 @@ function startSequence() {
 
     show("screen2");
     setTimeout(() => show("screen3"), 2200);
-    setTimeout(() => show("screen4"), 4500);
+    setTimeout(() => {
+    show("screen4");
+    startHearts();
+}, 4500);
+}
+
+function startHearts() {
+    const heartsContainer = document.getElementById("hearts");
+
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💗";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }, 300);
 }
 
 function show(id) {
@@ -164,6 +226,7 @@ function show(id) {
 
 </body>
 </html>
+
 
 
 
