@@ -40,15 +40,17 @@ body {
 }
 
 .bg-love-text {
-    position: absolute;
-    font-size: 42px;
+   position: fixed;
+    font-size: 48px;
     font-family: cursive;
-    opacity: 0.08;
-    top: 40%;
+    opacity: 0.10;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     white-space: nowrap;
     pointer-events: none;
+    z-index: 0;
+    display: none;
 }
 
 .heart {
@@ -105,7 +107,9 @@ img {
 </head>
 
 <body>
-
+    
+<div id="bgLove" class="bg-love-text">Divya Ka Divy</div>
+    
 <!-- music -->
 <audio id="music" loop>
  <source src="music.mp3" type="audio/mpeg">
@@ -136,7 +140,6 @@ img {
 
 <!-- SCREEN 4 -->
 <div class="container screen" id="screen4">
-    <div class="bg-love-text">Divya Ka Divy</div>
     <div id="hearts"></div>
 
     <h1 class="pulse">Happy Valentine’s Day 💖</h1>
@@ -220,12 +223,21 @@ function startHearts() {
 function show(id) {
     document.querySelectorAll(".screen")
         .forEach(s => s.style.display = "none");
+
     document.getElementById(id).style.display = "block";
+
+    const bg = document.getElementById("bgLove");
+    if (id === "screen4") {
+        bg.style.display = "block";
+    } else {
+        bg.style.display = "none";
+    }
 }
 </script>
 
 </body>
 </html>
+
 
 
 
